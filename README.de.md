@@ -6,6 +6,7 @@
 ![python](https://img.shields.io/badge/python-3.10%2B-2f6b4a)
 ![license](https://img.shields.io/badge/license-GPL--2.0--or--later-2f6b4a)
 ![rules](https://img.shields.io/badge/Regelpaket-Warschau%20688%2F2025-2f6b4a)
+[![DOI](https://zenodo.org/badge/1432513049.svg)](https://doi.org/10.5281/zenodo.23624898)
 
 **Prüft Baumkatasterdaten gegen das Regelwerk des Auftraggebers vor der Abnahme und zeigt jedes Problem auf der Karte.**
 

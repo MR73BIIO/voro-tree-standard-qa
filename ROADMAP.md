@@ -20,7 +20,7 @@ Dane syntetyczne są oznaczone w nazwie pliku, w README i w polu `zrodlo`. Testy
 
 ## Etapy
 
-### v0.1 Fundament — w toku
+### v0.1 Fundament — domknięcie: wpis w Pulsie
 
 | Element | Stan |
 |---|---|
@@ -30,7 +30,7 @@ Dane syntetyczne są oznaczone w nazwie pliku, w README i w polu `zrodlo`. Testy
 | Strona w przeglądarce, 3 języki | zrobione |
 | Testy (5) i GitHub Actions, bramka jakości `--fail-on`, komenda `vtsqa` | zrobione |
 | Mapa wyniku w README (z prawdziwego uruchomienia), README PL/DE/EN | zrobione |
-| Repo publiczne, GitHub Pages, release v0.1.0, DOI Zenodo | do zrobienia |
+| Repo publiczne, GitHub Pages, release v0.1.0, DOI 10.5281/zenodo.23624899 | zrobione |
 | Puls: wpis `milestone` z DOI, PL/DE/EN | po DOI |
 
 **Kryterium wyjścia:** testy przechodzą; w QGIS warstwa `findings` pokazuje 11 znalezisk na pliku syntetycznym; strona działa na GitHub Pages w PL/DE/EN; release ma DOI; wpis milestone w Pulsie.

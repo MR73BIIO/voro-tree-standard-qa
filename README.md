@@ -6,6 +6,7 @@
 ![python](https://img.shields.io/badge/python-3.10%2B-2f6b4a)
 ![license](https://img.shields.io/badge/license-GPL--2.0--or--later-2f6b4a)
 ![rules](https://img.shields.io/badge/rule%20pack-Warsaw%20688%2F2025-2f6b4a)
+[![DOI](https://zenodo.org/badge/1432513049.svg)](https://doi.org/10.5281/zenodo.23624898)
 
 **Checks tree inventory data against the client's standard before acceptance, and shows every problem on the map.**
 

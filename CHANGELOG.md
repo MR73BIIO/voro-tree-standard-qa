@@ -2,6 +2,8 @@
 
 ## 0.1.0 — 2026-10-24
 
+DOI: [10.5281/zenodo.23624899](https://doi.org/10.5281/zenodo.23624899) (wersja / Version / version 0.1.0), [10.5281/zenodo.23624898](https://doi.org/10.5281/zenodo.23624898) (wszystkie wersje / alle Versionen / all versions)
+
 **PL**
 - Silnik reguł R01–R10 dla Standardu 688/2025 m.st. Warszawy, komunikaty PL/DE/EN.
 - Syntetyczny plik `data/sample/rembertow_syntetyczne.gpkg`: 30 drzew, 11 celowo wstawionych błędów.
