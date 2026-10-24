@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*_findings.gpkg
+*_findings.*.md
+.venv/

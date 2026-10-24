@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terminy oględzin drzew</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: narzędzie robocze — przełącznik języka, kalkulator i macierz zał. 7, niżej kontrola tabeli z listą znalezisk */
+:root{
+  --bg:#eef1ec; --surface:#fbfcf9; --ink:#1d2a22; --muted:#5a685f; --line:#cdd6cc;
+  --accent:#2f6b4a; --accent-soft:#dbe8df;
+  --ok:#2f7a4f; --warn:#a86a10; --bad:#b23a2e; --info:#3b6a8f;
+  --ok-bg:#e1efe5; --warn-bg:#f6ebd6; --bad-bg:#f6e0dc; --info-bg:#dfe9f1;
+  --f-display:"Zilla Slab",Georgia,serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141a16; --surface:#1b231e; --ink:#e3ebe4; --muted:#9db0a2; --line:#2e3a32;
+  --accent:#7cc39a; --accent-soft:#233a2c;
+  --ok:#7cc39a; --warn:#e2b25a; --bad:#ef8a7c; --info:#8fb8db;
+  --ok-bg:#1f3527; --warn-bg:#3a2e17; --bad-bg:#3c211d; --info-bg:#1c2c3a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141a16; --surface:#1b231e; --ink:#e3ebe4; --muted:#9db0a2; --line:#2e3a32;
+  --accent:#7cc39a; --accent-soft:#233a2c;
+  --ok:#7cc39a; --warn:#e2b25a; --bad:#ef8a7c; --info:#8fb8db;
+  --ok-bg:#1f3527; --warn-bg:#3a2e17; --bad-bg:#3c211d; --info-bg:#1c2c3a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 40px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,5vw,40px)}
+h2{font-size:22px}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lead{color:var(--muted)}
+header{display:flex;flex-direction:column;gap:10px}
+.headrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.lang button{font:600 13px var(--f-mono);letter-spacing:.06em;padding:6px 12px;border:0;border-radius:0;background:transparent;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+legend{font-weight:600;margin-bottom:6px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:inline-flex;flex-direction:column;gap:2px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer;min-width:84px}
+.seg span b{font:600 15px var(--f-mono)}
+.seg span small{font-size:12px;color:var(--muted)}
+.seg input:checked + span{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.seg input:disabled + span{opacity:.4;cursor:not-allowed}
+.result{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.result .big{font:700 30px var(--f-display);color:var(--accent)}
+.note{font-size:13px;color:var(--muted)}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:center}
+th{font:600 13px var(--f-body);background:var(--bg)}
+td{font:500 14px var(--f-mono)}
+td.hl{background:var(--accent-soft);color:var(--accent);font-weight:600;box-shadow:inset 0 0 0 2px var(--accent)}
+caption{caption-side:bottom;text-align:left;font-size:12px;color:var(--muted);padding-top:8px}
+textarea{width:100%;min-height:170px;font:13px/1.5 var(--f-mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;resize:vertical}
+textarea:focus-visible,button:focus-visible,input[type=file]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:600 14px var(--f-body);padding:9px 16px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.filelab{font-size:13px;color:var(--muted)}
+code{font:13px var(--f-mono);background:var(--bg);padding:1px 5px;border-radius:4px}
+.summary{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 13px var(--f-body);padding:4px 10px;border-radius:999px}
+.c-bad{background:var(--bad-bg);color:var(--bad)} .c-warn{background:var(--warn-bg);color:var(--warn)}
+.c-info{background:var(--info-bg);color:var(--info)} .c-ok{background:var(--ok-bg);color:var(--ok)}
+.results{display:flex;flex-direction:column;gap:12px}
+.findings{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.findings li{display:grid;grid-template-columns:6px minmax(0,1fr);background:var(--bg);border-radius:8px;overflow:hidden}
+.findings .bar{background:var(--muted)}
+.findings .body{padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.findings .top{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.tag{font:500 12px var(--f-mono);border:1px solid var(--line);border-radius:4px;padding:0 6px;background:var(--surface)}
+.findings .msg{font-size:14px}
+.findings .ref{font-size:12px;color:var(--muted)}
+.s-bad .bar{background:var(--bad)} .s-warn .bar{background:var(--warn)} .s-info .bar{background:var(--info)}
+.sample{font-size:12px;color:var(--warn);font-weight:600}
+.err{color:var(--bad);font-size:14px}
+footer{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+footer a{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.seg span{transition:background .15s,border-color .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="headrow">
+    <div class="eyebrow" data-t="eyebrow"></div>
+    <div class="lang" role="group" aria-label="Język / Sprache / Language">
+      <button type="button" id="lang-pl" data-lang="pl" aria-pressed="true">PL</button>
+      <button type="button" id="lang-de" data-lang="de" aria-pressed="false">DE</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <h1 data-t="h1"></h1>
+  <p class="lead" data-t="lead"></p>
+</header>
+
+<section class="grid2">
+  <div class="panel">
+    <h2 data-t="calc"></h2>
+    <fieldset>
+      <legend data-t="legK"></legend>
+      <div class="seg">
+        <label><input type="radio" name="klasa" id="k1" value="1" checked><span><b>1</b><small data-t="k1"></small></span></label>
+        <label><input type="radio" name="klasa" id="k2" value="2"><span><b>2</b><small data-t="k2"></small></span></label>
+        <label><input type="radio" name="klasa" id="k3" value="3"><span><b>3</b><small data-t="k3"></small></span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend data-t="legU"></legend>
+      <div class="seg">
+        <label><input type="radio" name="uz" id="uO" value="O"><span><b>O</b><small data-t="uO"></small></span></label>
+        <label><input type="radio" name="uz" id="uN" value="N"><span><b>N</b><small data-t="uN"></small></span></label>
+        <label><input type="radio" name="uz" id="uS" value="S" checked><span><b>S</b><small data-t="uS"></small></span></label>
+        <label><input type="radio" name="uz" id="uW" value="W"><span><b>W</b><small data-t="uW"></small></span></label>
+      </div>
+    </fieldset>
+    <div class="result" aria-live="polite">
+      <div class="note" data-t="next"></div>
+      <div class="big" id="res-big"></div>
+      <div class="note" id="res-note"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2 data-t="matrixH"></h2>
+    <div class="tbl-wrap">
+      <table id="matrix">
+        <thead><tr><th data-t="colK"></th><th>O</th><th>N</th><th>S</th><th>W</th></tr></thead>
+        <tbody>
+          <tr data-k="1"><th>1 · <span data-t="k1"></span></th><td colspan="4" data-u="*" data-p="36" data-x="noUse"></td></tr>
+          <tr data-k="2"><th>2 · <span data-t="k2"></span></th><td data-u="O" data-p="36"></td><td data-u="N" data-p="24"></td><td data-u="S" data-p="12"></td><td data-u="W" data-p="12"></td></tr>
+          <tr data-k="3"><th>3 · <span data-t="k3"></span></th><td data-u="O" data-p="24"></td><td data-u="N" data-p="12"></td><td data-u="S" data-p="6"></td><td data-u="W" data-p="6"></td></tr>
+        </tbody>
+        <caption data-t="cap"></caption>
+      </table>
+    </div>
+    <p class="note" data-t="matrixNote"></p>
+  </div>
+</section>
+
+<section class="panel">
+  <h2 data-t="checkH"></h2>
+  <p class="lead" data-t="checkLead" data-html="1"></p>
+  <span class="sample" id="sample-flag" data-t="sample"></span>
+  <textarea id="csv" spellcheck="false" aria-label="CSV"></textarea>
+  <div class="row">
+    <button id="run" type="button" class="btn" data-t="run"></button>
+    <button id="reset" type="button" class="btn ghost" data-t="reset"></button>
+    <label class="filelab"><span data-t="file"></span> <input type="file" id="file" accept=".csv,.txt,text/csv"></label>
+  </div>
+  <div id="out" class="results" aria-live="polite"></div>
+</section>
+
+<footer>
+  <p data-t="disc"></p>
+  <p data-t="sig"></p>
+  <p><a href="https://zzw.waw.pl/wp-content/uploads/2025/05/standard_przegladow_analiz_dendrologicznych2025.pdf" target="_blank" rel="noopener" data-t="link"></a> · <a href="https://github.com/MR73BIIO/voro-tree-standard-qa" target="_blank" rel="noopener">GitHub: MR73BIIO/voro-tree-standard-qa</a></p>
+</footer>
+</div>
+
+<script>
+const T={
+pl:{eyebrow:'Standard 688/2025 · Warszawa · zał. 7',h1:'Terminy oględzin drzew',
+ lead:'Kalkulator terminu kolejnych oględzin według Standardu przeglądów i analiz dendrologicznych m.st. Warszawy oraz kontrola tabeli drzew: wklej dane z inwentaryzacji i zobacz, które rekordy nie zgadzają się ze Standardem.',
+ calc:'Kalkulator',legK:'Klasa ryzyka (stan zdrowotny, zał. 5)',legU:'Użytkowanie terenu (zał. 6)',
+ k1:'umiarkowane',k2:'podwyższone',k3:'wysokie',uO:'ograniczone',uN:'niskie',uS:'średnie',uW:'wysokie',
+ next:'Kolejne oględziny za',matrixH:'Macierz częstotliwości oględzin',colK:'Klasa',noUse:'(bez kategorii użytkowania)',
+ cap:'Źródło: Standard przeglądów i analiz dendrologicznych m.st. Warszawy, załącznik 7 (zał. do Zarządzenia nr 688/2025 z 25.04.2025).',
+ matrixNote:'Klasa 1 nie dostaje kategorii użytkowania terenu i jest dokumentowana jako obszar. Klasy 2 i 3 są inwentaryzowane punktowo i wymagają co najmniej 2 zdjęć.',
+ res1:'Klasa 1: termin zawsze 3 lata, bez kategorii użytkowania terenu.',
+ resK:(k,u,n)=>`Klasa ${k}, użytkowanie ${u} (${n}). Dokumentacja punktowa, min. 2 zdjęcia.`,
+ checkH:'Kontrola tabeli drzew',
+ checkLead:'Wklej dane jako CSV (separator przecinek albo średnik) albo wczytaj plik. Wymagane kolumny: <code>nr</code>, <code>klasa</code>, <code>uzytkowanie</code>, <code>data_ogledzin</code>, <code>data_kolejnych</code>. Opcjonalnie: <code>obwod</code> (cm, na 130 cm). Daty w formacie RRRR-MM-DD. Dane nie opuszczają przeglądarki.',
+ sample:'Przykładowe dane, nie są to rekordy żadnej dzielnicy.',run:'Sprawdź tabelę',reset:'Wstaw przykład',file:'Plik CSV:',
+ disc:'To narzędzie pomocnicze. Nie zastępuje oceny ogrodnika ani dendrologa i nie sprawdza samej oceny stanu zdrowotnego, tylko zgodność zapisów z regułami Standardu.',
+ sig:'Marcin Ruszczak (MR73BIIO) · kontrola jakości danych GIS i ewidencji zieleni · polski · niemiecki · rosyjski · angielski',
+ link:'Tekst Standardu 688/2025 (PDF, ZZW, po polsku)',
+ y:m=>m===6?'0,5 roku':m===12?'1 rok':(m/12)+' lata',
+ sev:{bad:'błąd',warn:'ostrzeżenie',info:'informacja'},refPre:'Standard 688/2025: ',sec:'pkt',ann:'zał.',
+ sum:(n,c)=>`${n} rekordów · ${c} bez błędów i ostrzeżeń`,nBad:n=>`${n} błędów`,nWarn:n=>`${n} ostrzeżeń`,nInfo:n=>`${n} informacji`,
+ allOk:'Wszystkie rekordy są zgodne z regułami sprawdzanymi przez to narzędzie.',row:'wiersz',none:'brak',
+ eRows:'Tabela ma mniej niż dwa wiersze. Potrzebny jest nagłówek i co najmniej jeden rekord.',
+ eCols:c=>`Brak kolumn: ${c}. Sprawdź nagłówek pierwszego wiersza.`,
+ eFile:'Nie udało się odczytać pliku. Zapisz go jako CSV w UTF-8 i spróbuj ponownie.',
+ mOb:o=>`Obwód ${o} cm (≤ 60 cm na wysokości 130 cm): drzewo poza zakresem Standardu, chyba że zakwalifikowano je indywidualnie.`,
+ mK:k=>`Klasa „${k}” spoza dozwolonych wartości 1–3.`,
+ mOld:k=>`Klasa ${k} pochodzi z dawnej skali 5-stopniowej. Termin z poprzedniej metody obowiązuje do kolejnych oględzin, potem trzeba nadać klasę 1–3.`,
+ m1U:u=>`Klasa 1 ma kategorię użytkowania „${u}”. Standard nie przypisuje jej drzewom umiarkowanego ryzyka.`,
+ mNoU:k=>`Klasa ${k} bez kategorii użytkowania terenu (O/N/S/W). Nie da się wyznaczyć terminu.`,
+ mBadU:u=>`Nieznana kategoria użytkowania „${u}”. Dozwolone: O, N, S, W.`,
+ mD0:'Brak lub błędny format daty oględzin (wymagane RRRR-MM-DD).',mD1:'Brak lub błędny format daty kolejnych oględzin (wymagane RRRR-MM-DD).',
+ mLate:(d,e,p,k)=>`Termin kolejnych oględzin ${d} jest późniejszy niż wymagany ${e} (${p} dla klasy ${k}).`,
+ mEarly:(d,e)=>`Termin ${d} jest wcześniejszy niż wymagany ${e}. To dopuszczalne, ale warto sprawdzić, czy nie wynika z pomyłki.`},
+de:{eyebrow:'Standard 688/2025 · Warschau · Anl. 7',h1:'Baumkontroll-Intervalle',
+ lead:'Rechner für das nächste Kontrollintervall nach dem Standard für Baumkontrollen und dendrologische Analysen der Stadt Warschau, dazu eine Prüfung von Baumtabellen: Inventurdaten einfügen und sehen, welche Datensätze nicht dem Standard entsprechen.',
+ calc:'Rechner',legK:'Risikoklasse (Vitalität und Zustand, Anl. 5)',legU:'Nutzungsintensität der Fläche (Anl. 6)',
+ k1:'mäßig',k2:'erhöht',k3:'hoch',uO:'eingeschränkt',uN:'niedrig',uS:'mittel',uW:'hoch',
+ next:'Nächste Kontrolle in',matrixH:'Matrix der Kontrollintervalle',colK:'Klasse',noUse:'(ohne Nutzungskategorie)',
+ cap:'Quelle: Standard für Baumkontrollen und dendrologische Analysen der Stadt Warschau, Anlage 7 (Anlage zur Verfügung Nr. 688/2025 vom 25.04.2025).',
+ matrixNote:'Klasse 1 erhält keine Nutzungskategorie und wird flächig dokumentiert. Bäume der Klassen 2 und 3 werden als Einzelpunkte erfasst und brauchen mindestens 2 Fotos.',
+ res1:'Klasse 1: Intervall immer 3 Jahre, ohne Nutzungskategorie.',
+ resK:(k,u,n)=>`Klasse ${k}, Nutzung ${u} (${n}). Punkterfassung, mind. 2 Fotos.`,
+ checkH:'Prüfung der Baumtabelle',
+ checkLead:'Daten als CSV einfügen (Trennzeichen Komma oder Semikolon) oder Datei laden. Pflichtspalten: <code>nr</code>, <code>klasa</code>, <code>uzytkowanie</code>, <code>data_ogledzin</code>, <code>data_kolejnych</code> (Baum-Nr., Klasse, Nutzung, Kontrolldatum, nächste Kontrolle). Optional: <code>obwod</code> (Stammumfang in cm auf 130 cm). Datum im Format JJJJ-MM-TT. Die Daten verlassen den Browser nicht.',
+ sample:'Beispieldaten, keine Datensätze eines Stadtbezirks.',run:'Tabelle prüfen',reset:'Beispiel einfügen',file:'CSV-Datei:',
+ disc:'Ein Hilfswerkzeug. Es ersetzt nicht die Beurteilung durch Gärtner oder Baumsachverständige und prüft nicht die Zustandsbewertung selbst, sondern nur, ob die Einträge den Regeln des Standards entsprechen.',
+ sig:'Marcin Ruszczak (MR73BIIO) · Qualitätsprüfung von GIS- und Baumkatasterdaten · Polnisch · Deutsch · Russisch · Englisch',
+ link:'Text des Standards 688/2025 (PDF, ZZW, auf Polnisch)',
+ y:m=>m===6?'0,5 Jahre':m===12?'1 Jahr':(m/12)+' Jahre',
+ sev:{bad:'Fehler',warn:'Warnung',info:'Hinweis'},refPre:'Standard 688/2025: ',sec:'Abschn.',ann:'Anl.',
+ sum:(n,c)=>`${n} Datensätze · ${c} ohne Fehler und Warnungen`,nBad:n=>`${n} Fehler`,nWarn:n=>`${n} Warnungen`,nInfo:n=>`${n} Hinweise`,
+ allOk:'Alle Datensätze entsprechen den Regeln, die dieses Werkzeug prüft.',row:'Zeile',none:'leer',
+ eRows:'Die Tabelle hat weniger als zwei Zeilen. Nötig sind eine Kopfzeile und mindestens ein Datensatz.',
+ eCols:c=>`Fehlende Spalten: ${c}. Bitte die Kopfzeile prüfen.`,
+ eFile:'Die Datei konnte nicht gelesen werden. Bitte als CSV in UTF-8 speichern und erneut versuchen.',
+ mOb:o=>`Stammumfang ${o} cm (≤ 60 cm in 130 cm Höhe): Baum außerhalb des Geltungsbereichs, sofern nicht einzeln einbezogen.`,
+ mK:k=>`Klasse „${k}“ liegt außerhalb der zulässigen Werte 1–3.`,
+ mOld:k=>`Klasse ${k} stammt aus der früheren 5-stufigen Skala. Der alte Termin gilt bis zur nächsten Kontrolle, danach ist eine Klasse 1–3 zu vergeben.`,
+ m1U:u=>`Klasse 1 hat die Nutzungskategorie „${u}“. Der Standard sieht für Bäume mit mäßigem Risiko keine vor.`,
+ mNoU:k=>`Klasse ${k} ohne Nutzungskategorie (O/N/S/W). Das Intervall lässt sich nicht bestimmen.`,
+ mBadU:u=>`Unbekannte Nutzungskategorie „${u}“. Zulässig: O, N, S, W.`,
+ mD0:'Kontrolldatum fehlt oder hat ein falsches Format (JJJJ-MM-TT).',mD1:'Datum der nächsten Kontrolle fehlt oder hat ein falsches Format (JJJJ-MM-TT).',
+ mLate:(d,e,p,k)=>`Nächste Kontrolle am ${d} liegt nach dem geforderten Termin ${e} (${p} für Klasse ${k}).`,
+ mEarly:(d,e)=>`Termin ${d} liegt vor dem geforderten ${e}. Zulässig, aber prüfen, ob kein Eingabefehler vorliegt.`},
+en:{eyebrow:'Standard 688/2025 · Warsaw · Annex 7',h1:'Tree Inspection Intervals',
+ lead:'A calculator for the next inspection date under the City of Warsaw Standard for tree inspections and dendrological analyses, plus a tree table check: paste your inventory data and see which records do not match the Standard.',
+ calc:'Calculator',legK:'Risk class (tree condition, Annex 5)',legU:'Site use intensity (Annex 6)',
+ k1:'moderate',k2:'elevated',k3:'high',uO:'restricted',uN:'low',uS:'medium',uW:'high',
+ next:'Next inspection in',matrixH:'Inspection interval matrix',colK:'Class',noUse:'(no site use category)',
+ cap:'Source: City of Warsaw Standard for tree inspections and dendrological analyses, Annex 7 (annex to Mayoral Order No. 688/2025 of 25 April 2025).',
+ matrixNote:'Class 1 gets no site use category and is recorded as an area. Classes 2 and 3 are recorded as individual points and need at least 2 photos.',
+ res1:'Class 1: always 3 years, no site use category.',
+ resK:(k,u,n)=>`Class ${k}, site use ${u} (${n}). Point record, at least 2 photos.`,
+ checkH:'Tree table check',
+ checkLead:'Paste data as CSV (comma or semicolon separated) or load a file. Required columns: <code>nr</code>, <code>klasa</code>, <code>uzytkowanie</code>, <code>data_ogledzin</code>, <code>data_kolejnych</code> (tree ID, class, site use, inspection date, next inspection). Optional: <code>obwod</code> (trunk girth in cm at 130 cm). Dates as YYYY-MM-DD. Your data stays in your browser.',
+ sample:'Sample data, not records from any district.',run:'Check table',reset:'Load sample',file:'CSV file:',
+ disc:'A helper tool. It does not replace an arborist’s assessment and does not check the condition rating itself, only whether the records follow the Standard’s rules.',
+ sig:'Marcin Ruszczak (MR73BIIO) · QA for GIS and tree inventory data · Polish · German · Russian · English',
+ link:'Full text of Standard 688/2025 (PDF, ZZW, in Polish)',
+ y:m=>m===6?'0.5 year':m===12?'1 year':(m/12)+' years',
+ sev:{bad:'error',warn:'warning',info:'note'},refPre:'Standard 688/2025: ',sec:'sec.',ann:'Annex',
+ sum:(n,c)=>`${n} records · ${c} without errors or warnings`,nBad:n=>`${n} errors`,nWarn:n=>`${n} warnings`,nInfo:n=>`${n} notes`,
+ allOk:'All records follow the rules this tool checks.',row:'row',none:'empty',
+ eRows:'The table has fewer than two rows. It needs a header row and at least one record.',
+ eCols:c=>`Missing columns: ${c}. Check the header row.`,
+ eFile:'The file could not be read. Save it as UTF-8 CSV and try again.',
+ mOb:o=>`Girth ${o} cm (≤ 60 cm at 130 cm): outside the Standard’s scope unless included individually.`,
+ mK:k=>`Class "${k}" is outside the allowed values 1–3.`,
+ mOld:k=>`Class ${k} comes from the former 5-level scale. The old date applies until the next inspection, then a class 1–3 must be assigned.`,
+ m1U:u=>`Class 1 has site use category "${u}". The Standard assigns none to moderate-risk trees.`,
+ mNoU:k=>`Class ${k} has no site use category (O/N/S/W). The interval cannot be set.`,
+ mBadU:u=>`Unknown site use category "${u}". Allowed: O, N, S, W.`,
+ mD0:'Inspection date missing or in the wrong format (YYYY-MM-DD).',mD1:'Next inspection date missing or in the wrong format (YYYY-MM-DD).',
+ mLate:(d,e,p,k)=>`Next inspection ${d} is later than the required ${e} (${p} for class ${k}).`,
+ mEarly:(d,e)=>`Date ${d} is earlier than the required ${e}. Allowed, but check it is not a typo.`}
+};
+const TITLES={pl:'Terminy oględzin drzew',de:'Baumkontroll-Intervalle',en:'Tree Inspection Intervals'};
+let L='pl';
+const MATRIX={2:{O:36,N:24,S:12,W:12},3:{O:24,N:12,S:6,W:6}};
+function periodFor(k,u){if(k===1)return 36;const r=MATRIX[k];return r?r[u]:undefined;}
+const t=k=>T[L][k];
+
+function applyLang(){
+  document.documentElement.lang=L; document.title=TITLES[L];
+  document.querySelectorAll('[data-t]').forEach(el=>{const v=t(el.dataset.t); if(el.dataset.html) el.innerHTML=v; else el.textContent=v;});
+  document.querySelectorAll('#matrix td').forEach(td=>{td.textContent=t('y')(+td.dataset.p)+(td.dataset.x?' '+t(td.dataset.x):'');});
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===L)));
+  calc(); if(lastRun) run();
+}
+function setLang(l){if(!T[l])return;L=l;try{localStorage.setItem('oddech688-lang',l);}catch(e){} applyLang();}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+function calc(){
+  const k=+document.querySelector('input[name=klasa]:checked').value;
+  document.querySelectorAll('input[name=uz]').forEach(i=>{i.disabled=(k===1);});
+  const u=(document.querySelector('input[name=uz]:checked')||{}).value||'S';
+  document.getElementById('res-big').textContent=t('y')(periodFor(k,u));
+  document.getElementById('res-note').textContent= k===1 ? t('res1') : t('resK')(k,u,t('u'+u));
+  document.querySelectorAll('#matrix td').forEach(td=>{const tk=+td.parentElement.dataset.k;
+    td.classList.toggle('hl', tk===k && (k===1 || td.dataset.u===u));});
+}
+document.querySelectorAll('input[name=klasa],input[name=uz]').forEach(i=>i.addEventListener('change',calc));
+
+const SAMPLE=`nr;klasa;uzytkowanie;data_ogledzin;data_kolejnych;obwod
+WAW-0001;1;;2026-04-14;2029-04-14;142
+WAW-0002;1;S;2026-04-14;2029-04-14;95
+WAW-0003;2;W;2026-04-15;2027-04-15;188
+WAW-0004;2;N;2026-04-15;2029-04-15;120
+WAW-0005;3;S;2026-04-16;2027-04-16;210
+WAW-0006;3;;2026-04-16;2026-10-16;175
+WAW-0007;4;W;2023-05-10;2025-05-10;160
+WAW-0008;2;S;2026-04-17;2027-04-17;48
+WAW-0009;3;W;2026-04-17;2026-10-17;233
+WAW-0010;2;X;2026-04-18;2027-04-18;130`;
+
+function parseCSV(text){
+  const lines=text.replace(/\r/g,'').split('\n').filter(l=>l.trim()!=='');
+  if(lines.length<2) throw new Error(t('eRows'));
+  const sep=(lines[0].split(';').length>=lines[0].split(',').length)?';':',';
+  const head=lines[0].split(sep).map(h=>h.trim().toLowerCase().replace(/^﻿/,''));
+  const need=['nr','klasa','uzytkowanie','data_ogledzin','data_kolejnych'];
+  const missing=need.filter(n=>!head.includes(n));
+  if(missing.length) throw new Error(t('eCols')(missing.join(', ')));
+  return lines.slice(1).map((l,i)=>{const c=l.split(sep);const o={_line:i+2};head.forEach((h,j)=>o[h]=(c[j]||'').trim());return o;});
+}
+function parseDate(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;const d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));return d.getUTCMonth()===+m[2]-1?d:null;}
+function addMonths(d,n){const r=new Date(d.getTime());const day=r.getUTCDate();r.setUTCDate(1);r.setUTCMonth(r.getUTCMonth()+n);const last=new Date(Date.UTC(r.getUTCFullYear(),r.getUTCMonth()+1,0)).getUTCDate();r.setUTCDate(Math.min(day,last));return r;}
+const fmt=d=>d.toISOString().slice(0,10); const DAY=86400000;
+
+/* ref: lista [typ, numer], typ 's' = punkt/rozdział, 'a' = załącznik */
+function checkRow(r){
+  const f=[]; const nr=r.nr||(t('row')+' '+r._line);
+  const add=(s,msg,ref)=>f.push({s,nr,msg,ref});
+  const kRaw=r.klasa, k=+kRaw, u=(r.uzytkowanie||'').toUpperCase();
+  const d0=parseDate(r.data_ogledzin), d1=parseDate(r.data_kolejnych);
+  if(r.obwod){const ob=parseFloat(r.obwod.replace(',','.')); if(!isNaN(ob)&&ob<=60) add('info',t('mOb')(ob),[['s','3.2']]);}
+  if(!/^[1-5]$/.test(kRaw||'')){add('bad',t('mK')(kRaw||t('none')),[['s','4.1.2']]);return f;}
+  if(k>3){add('warn',t('mOld')(k),[['s','3.3']]);return f;}
+  if(k===1&&u) add('warn',t('m1U')(u),[['s','4.1.2'],['a','7']]);
+  if(k>1&&!u){add('bad',t('mNoU')(k),[['a','6'],['a','7']]);return f;}
+  if(k>1&&!MATRIX[k][u]){add('bad',t('mBadU')(r.uzytkowanie),[['a','6']]);return f;}
+  if(!d0){add('bad',t('mD0'),[['a','2'],['a','3']]);return f;}
+  if(!d1){add('bad',t('mD1'),[['a','2'],['a','3']]);return f;}
+  const m=periodFor(k,u), exp=addMonths(d0,m), diff=Math.round((d1-exp)/DAY);
+  if(diff>31) add('bad',t('mLate')(fmt(d1),fmt(exp),t('y')(m),k>1?k+' / '+u:k),[['a','7']]);
+  else if(diff<-31) add('info',t('mEarly')(fmt(d1),fmt(exp)),[['a','7'],['s','5.3']]);
+  return f;
+}
+const refText=ref=>t('refPre')+ref.map(([ty,n])=>(ty==='s'?t('sec'):t('ann'))+' '+n).join(', ');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let lastRun=false;
+function run(){
+  lastRun=true;
+  const out=document.getElementById('out');
+  let rows;
+  try{rows=parseCSV(document.getElementById('csv').value);}
+  catch(e){out.innerHTML=`<p class="err">${esc(e.message)}</p>`;return;}
+  const all=rows.flatMap(checkRow);
+  const cnt={bad:0,warn:0,info:0}; all.forEach(x=>cnt[x.s]++);
+  const clean=rows.length-new Set(all.filter(x=>x.s!=='info').map(x=>x.nr)).size;
+  const order={bad:0,warn:1,info:2}; all.sort((a,b)=>order[a.s]-order[b.s]);
+  out.innerHTML=`
+    <div class="summary">
+      <span class="chip c-ok">${esc(t('sum')(rows.length,clean))}</span>
+      <span class="chip c-bad">${esc(t('nBad')(cnt.bad))}</span>
+      <span class="chip c-warn">${esc(t('nWarn')(cnt.warn))}</span>
+      <span class="chip c-info">${esc(t('nInfo')(cnt.info))}</span>
+    </div>
+    ${all.length?`<ul class="findings">${all.map(x=>`
+      <li class="s-${x.s}"><span class="bar"></span><div class="body">
+        <div class="top"><span class="tag">${esc(x.nr)}</span><strong>${esc(t('sev')[x.s])}</strong></div>
+        <span class="msg">${esc(x.msg)}</span><span class="ref">${esc(refText(x.ref))}</span>
+      </div></li>`).join('')}</ul>`:`<p>${esc(t('allOk'))}</p>`}`;
+}
+function loadSample(){document.getElementById('csv').value=SAMPLE;document.getElementById('sample-flag').hidden=false;run();}
+document.getElementById('run').addEventListener('click',run);
+document.getElementById('reset').addEventListener('click',loadSample);
+document.getElementById('csv').addEventListener('input',()=>{document.getElementById('sample-flag').hidden=true;});
+document.getElementById('file').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{document.getElementById('csv').value=rd.result;document.getElementById('sample-flag').hidden=true;run();};
+  rd.onerror=()=>{document.getElementById('out').innerHTML=`<p class="err">${esc(t('eFile'))}</p>`;};
+  rd.readAsText(f,'utf-8');
+});
+
+(function init(){
+  const h=(location.hash||'').slice(1).toLowerCase();
+  let saved=null; try{saved=localStorage.getItem('oddech688-lang');}catch(e){}
+  L=T[h]?h:(T[saved]?saved:'pl');
+  document.getElementById('csv').value=SAMPLE;
+  applyLang(); run();
+})();
+</script>
+</body>
+</html>

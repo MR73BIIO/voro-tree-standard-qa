@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "voro-tree-standard-qa"
+version: 0.1.0
+date-released: 2026-10-24
+license: GPL-2.0-or-later
+repository-code: "https://github.com/MR73BIIO/voro-tree-standard-qa"
+authors:
+  - family-names: Ruszczak
+    given-names: Marcin
+    orcid: "https://orcid.org/0009-0004-0170-4277"
+keywords: [qgis, gis, trees, tree-inventory, data-quality, geopackage, warszawa]
