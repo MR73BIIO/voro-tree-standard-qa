@@ -1,0 +1,537 @@
+[
+ {
+  "file": "golden.gpkg",
+  "seed": 688,
+  "life": "L1",
+  "cases": []
+ },
+ {
+  "file": "seed_A.gpkg",
+  "seed": 101,
+  "life": "L1",
+  "cases": [
+   {
+    "case": "T1a",
+    "row": 4,
+    "expected": [
+     [
+      "A-004",
+      "R01",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T1b",
+    "row": 28,
+    "expected": [
+     [
+      "A-028",
+      "R01",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T2",
+    "row": 29,
+    "expected": [
+     [
+      "A-029",
+      "R02",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T3",
+    "row": 24,
+    "expected": [
+     [
+      "A-024",
+      "R03",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T4",
+    "row": 21,
+    "expected": [
+     [
+      "A-021",
+      "R04",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T5",
+    "row": 12,
+    "expected": [
+     [
+      "A-012",
+      "R05",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T6a",
+    "row": 10,
+    "expected": [
+     [
+      "A-010",
+      "R06",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T6b",
+    "row": 5,
+    "expected": [
+     [
+      "A-005",
+      "R06",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "T7",
+    "row": 25,
+    "expected": [
+     [
+      "A-025",
+      "R07",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "T8a",
+    "row": 20,
+    "expected": [
+     [
+      "A-020",
+      "R08",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T8b",
+    "row": 14,
+    "expected": [
+     [
+      "A-014",
+      "R08",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T9",
+    "row": 13,
+    "expected": [
+     [
+      "A-011",
+      "R09",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T10",
+    "row": 7,
+    "expected": [
+     [
+      "#7",
+      "R10",
+      "blad"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "file": "seed_B.gpkg",
+  "seed": 202,
+  "life": "L2",
+  "cases": [
+   {
+    "case": "T1a",
+    "row": 28,
+    "expected": [
+     [
+      "B-028",
+      "R01",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T1b",
+    "row": 18,
+    "expected": [
+     [
+      "B-018",
+      "R01",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T2",
+    "row": 30,
+    "expected": [
+     [
+      "B-030",
+      "R02",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T3",
+    "row": 24,
+    "expected": [
+     [
+      "B-024",
+      "R03",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T4",
+    "row": 21,
+    "expected": [
+     [
+      "B-021",
+      "R04",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T5",
+    "row": 14,
+    "expected": [
+     [
+      "B-014",
+      "R05",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T6a",
+    "row": 26,
+    "expected": [
+     [
+      "B-026",
+      "R06",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T6b",
+    "row": 29,
+    "expected": [
+     [
+      "B-029",
+      "R06",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "T7",
+    "row": 11,
+    "expected": [
+     [
+      "B-011",
+      "R07",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "T8a",
+    "row": 8,
+    "expected": [
+     [
+      "B-008",
+      "R08",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T8b",
+    "row": 12,
+    "expected": [
+     [
+      "B-012",
+      "R08",
+      "ostrzezenie"
+     ]
+    ]
+   },
+   {
+    "case": "T9",
+    "row": 6,
+    "expected": [
+     [
+      "B-027",
+      "R09",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "T10",
+    "row": 23,
+    "expected": [
+     [
+      "#23",
+      "R10",
+      "blad"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "file": "seed_L3.gpkg",
+  "seed": 303,
+  "life": "L3",
+  "cases": [
+   {
+    "case": "B1",
+    "row": 13,
+    "expected": [
+     [
+      "F-013",
+      "R05",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "B2",
+    "row": 26,
+    "expected": [
+     [
+      "F-026",
+      "R05",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "B3",
+    "row": 15,
+    "expected": []
+   },
+   {
+    "case": "B4",
+    "row": 27,
+    "expected": [
+     [
+      "F-027",
+      "R01",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "B5",
+    "row": 7,
+    "expected": []
+   },
+   {
+    "case": "B6",
+    "row": 3,
+    "expected": []
+   },
+   {
+    "case": "B7",
+    "row": 10,
+    "expected": []
+   },
+   {
+    "case": "B8",
+    "row": 18,
+    "expected": [
+     [
+      "F-018",
+      "R07",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "B9",
+    "row": 14,
+    "expected": [
+     [
+      "F-014",
+      "R07",
+      "informacja"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "file": "seed_L4.gpkg",
+  "seed": 404,
+  "life": "L4",
+  "cases": [
+   {
+    "case": "C1",
+    "row": 9,
+    "expected": [
+     [
+      "C-009",
+      "R07",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "C2",
+    "row": 3,
+    "expected": []
+   },
+   {
+    "case": "C3",
+    "row": 1,
+    "expected": []
+   },
+   {
+    "case": "C4",
+    "row": 2,
+    "expected": [
+     [
+      "C-002",
+      "R06",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "M1",
+    "row": 30,
+    "expected": [
+     [
+      "C-030",
+      "R01",
+      "blad"
+     ],
+     [
+      "C-030",
+      "R07",
+      "informacja"
+     ]
+    ]
+   },
+   {
+    "case": "M2",
+    "row": 20,
+    "expected": [
+     [
+      "C-020",
+      "R02",
+      "blad"
+     ],
+     [
+      "C-020",
+      "R06",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "M3",
+    "row": 13,
+    "expected": [
+     [
+      "#13",
+      "R10",
+      "blad"
+     ],
+     [
+      "#13",
+      "R01",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "M4",
+    "row": 26,
+    "expected": [
+     [
+      "C-026",
+      "R04",
+      "blad"
+     ],
+     [
+      "C-026",
+      "R05",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "M5",
+    "row": 17,
+    "expected": [
+     [
+      "C-017",
+      "R08",
+      "blad"
+     ],
+     [
+      "C-017",
+      "R02",
+      "blad"
+     ]
+    ]
+   },
+   {
+    "case": "M6",
+    "row": 29,
+    "expected": [
+     [
+      "C-029",
+      "R01",
+      "ostrzezenie"
+     ],
+     [
+      "C-029",
+      "R08",
+      "blad"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "file": "seed_L3_b10_typed.gpkg",
+  "seed": 305,
+  "life": "L3",
+  "cases": [
+   {
+    "case": "B10",
+    "row": null,
+    "expected": []
+   }
+  ]
+ }
+]
