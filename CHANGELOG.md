@@ -2,6 +2,8 @@
 
 ## 0.1.1 — 2026-10-25
 
+DOI: [10.5281/zenodo.23640565](https://doi.org/10.5281/zenodo.23640565) (wersja / Version / version 0.1.1)
+
 **PL**
 - `tools/make_sample.py` domyślnie zapisuje do bieżącego katalogu; plik w repo nadpisuje tylko z `--update-repo-sample`. Nowa opcja `--out`. Zawartość danych bez zmian (ten sam seed, 30 rekordów).
 - `rules/warszawa_688/R0.md`: R0 zamknięte. Publiczny WMS m.st. Warszawy zwraca dla `ZIELEN_DRZEWA` tylko `OBJECTID` (114 wierszy, 109 z `OBJECTID`, 5 pustych), bez atrybutów wymaganych przez Standard 688/2025.
