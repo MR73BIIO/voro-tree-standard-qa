@@ -2,7 +2,16 @@
 
 To nie sa dane m.st. Warszawy. Polozenie: okolica ul. Grawerskiej (Rembertow),
 atrybuty wymyslone, czesc rekordow ma celowo wstawione bledy (opisane w EXPECTED).
+
+Uzycie:
+  python tools/make_sample.py                       # zapis do biezacego katalogu
+  python tools/make_sample.py --out /sciezka/x.gpkg # zapis pod wskazana sciezke
+  python tools/make_sample.py --update-repo-sample  # nadpisuje data/sample/ w repo
+
+Domyslnie plik w repo NIE jest nadpisywany: GPKG zapisuje znaczniki czasu,
+wiec kazde uruchomienie zmienialoby plik w historii git.
 """
+import argparse
 import datetime as dt
 import random
 from pathlib import Path
@@ -11,7 +20,7 @@ import geopandas as gpd
 from pyproj import Transformer
 from shapely.geometry import Point
 
-OUT = Path(__file__).resolve().parents[1] / "data" / "sample" / "rembertow_syntetyczne.gpkg"
+REPO_SAMPLE = Path(__file__).resolve().parents[1] / "data" / "sample" / "rembertow_syntetyczne.gpkg"
 random.seed(688)
 tr = Transformer.from_crs("EPSG:4326", "EPSG:2178", always_xy=True)
 cx, cy = tr.transform(21.1600, 52.2520)
@@ -64,6 +73,14 @@ as_class("WAW-R-024", 2, "O"); setrow("WAW-R-024", data_kolejnych="2026-13-01") 
 as_class("WAW-R-026", 2, "N"); as_class("WAW-R-027", 2, "N"); setrow("WAW-R-027", nr="WAW-R-026")  # R09 blad: duplikat numeru
 as_class("WAW-R-028", 2, "S"); setrow("WAW-R-028", nr="")            # R10 blad
 as_class("WAW-R-029", 1, "", polygon=False)           # R08 ostrzezenie: klasa 1 jako punkt
+
+ap = argparse.ArgumentParser(description="Syntetyczny GPKG (Rembertow, EPSG:2178)")
+g = ap.add_mutually_exclusive_group()
+g.add_argument("--out", type=Path, help="sciezka pliku wyjsciowego")
+g.add_argument("--update-repo-sample", action="store_true",
+               help=f"nadpisz plik w repo: {REPO_SAMPLE.relative_to(REPO_SAMPLE.parents[2])}")
+args = ap.parse_args()
+OUT = REPO_SAMPLE if args.update_repo_sample else (args.out or Path.cwd() / REPO_SAMPLE.name)
 
 gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs="EPSG:2178")
 OUT.parent.mkdir(parents=True, exist_ok=True)

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1 — 2026-10-25
+
+**PL**
+- `tools/make_sample.py` domyślnie zapisuje do bieżącego katalogu; plik w repo nadpisuje tylko z `--update-repo-sample`. Nowa opcja `--out`. Zawartość danych bez zmian (ten sam seed, 30 rekordów).
+- `rules/warszawa_688/R0.md`: R0 zamknięte. Publiczny WMS m.st. Warszawy zwraca dla `ZIELEN_DRZEWA` tylko `OBJECTID` (114 wierszy, 109 z `OBJECTID`, 5 pustych), bez atrybutów wymaganych przez Standard 688/2025.
+
+**DE**
+- `tools/make_sample.py` schreibt standardmäßig ins aktuelle Verzeichnis; die Datei im Repo wird nur mit `--update-repo-sample` überschrieben. Neue Option `--out`. Daten unverändert.
+- `R0.md`: R0 geschlossen. Der öffentliche WMS liefert für `ZIELEN_DRZEWA` nur `OBJECTID`, keine Attribute.
+
+**EN**
+- `tools/make_sample.py` writes to the current directory by default; the repo file is overwritten only with `--update-repo-sample`. New `--out` option. Data unchanged.
+- `R0.md`: R0 closed. The public WMS returns only `OBJECTID` for `ZIELEN_DRZEWA`, no attributes.
+
 ## 0.1.0 — 2026-10-24
 
 DOI: [10.5281/zenodo.23624899](https://doi.org/10.5281/zenodo.23624899) (wersja / Version / version 0.1.0), [10.5281/zenodo.23624898](https://doi.org/10.5281/zenodo.23624898) (wszystkie wersje / alle Versionen / all versions)
