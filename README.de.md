@@ -69,7 +69,7 @@ Es bewertet nicht den Zustand des Baumes und ersetzt keine Baumkontrolle durch F
 
 ## Stand
 
-Version 0.1.0. Nächste Etappen und Abschlusskriterien: [ROADMAP.md](ROADMAP.md#de). Änderungen: [CHANGELOG.md](CHANGELOG.md).
+Version 0.2.0. Erste gemessene Läufe (v0.2a): 4 Läufe auf Sätzen mit eingebauten Fehlern, 4/4 CONFIRMED, Ergebnisse in [OUTCOME_v0_2a.md](OUTCOME_v0_2a.md); bekannte Grenzen in [RULES.md](rules/warszawa_688/RULES.md). Nächste Etappen und Abschlusskriterien: [ROADMAP.md](ROADMAP.md#de). Änderungen: [CHANGELOG.md](CHANGELOG.md).
 
 ## Lizenz
 

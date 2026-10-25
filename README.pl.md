@@ -69,7 +69,7 @@ Nie ocenia stanu zdrowotnego drzewa i nie zastępuje ogrodnika ani dendrologa. S
 
 ## Stan
 
-Wersja 0.1.0. Kolejne etapy i kryteria ich zamknięcia: [ROADMAP.md](ROADMAP.md). Zmiany: [CHANGELOG.md](CHANGELOG.md).
+Wersja 0.2.0. Pierwsze zmierzone życia (v0.2a): 4 uruchomienia na zestawach wstrzykniętych błędów, 4/4 CONFIRMED, wyniki w [OUTCOME_v0_2a.md](OUTCOME_v0_2a.md); znane ograniczenia w [RULES.md](rules/warszawa_688/RULES.md). Kolejne etapy i kryteria ich zamknięcia: [ROADMAP.md](ROADMAP.md). Zmiany: [CHANGELOG.md](CHANGELOG.md).
 
 ## Licencja
 

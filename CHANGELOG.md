@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.0 — 2026-10-25
+
+**PL**
+- v0.2a: pierwsze zmierzone życia. Przewidywanie L1–L4 (K0–K7) zapieczętowane przed kodem; wstrzykiwacz `tools/inject.py`, pomiar `tools/measure.py`.
+- Wynik 4/4 CONFIRMED: `OUTCOME_v0_2a.md`, `results/v0_2a/`.
+- `RULES.md`: kolejność sprawdzania i dwa zmierzone ograniczenia (przerwanie po pierwszym błędzie typu R01/R02/R04/R05; obwód z jednostką pomijany).
+- ROADMAP: v0.2b skreślone (publiczny WMS daje tylko `OBJECTID`), następny etap v0.2.1.
+
+**DE**
+- v0.2a: erste gemessene Läufe. Vorhersage L1–L4 (K0–K7) vor dem Code versiegelt; Fehler-Injektor `tools/inject.py`, Messung `tools/measure.py`.
+- Ergebnis 4/4 CONFIRMED: `OUTCOME_v0_2a.md`, `results/v0_2a/`.
+- `RULES.md`: Prüfreihenfolge und zwei gemessene Grenzen.
+- ROADMAP: v0.2b gestrichen, nächste Etappe v0.2.1.
+
+**EN**
+- v0.2a: first measured runs. Prediction L1–L4 (K0–K7) sealed before the code; error injector `tools/inject.py`, measurement `tools/measure.py`.
+- Result 4/4 CONFIRMED: `OUTCOME_v0_2a.md`, `results/v0_2a/`.
+- `RULES.md`: check order and two measured limits.
+- ROADMAP: v0.2b dropped, next stage v0.2.1.
+
 ## 0.1.1 — 2026-10-25
 
 DOI: [10.5281/zenodo.23640565](https://doi.org/10.5281/zenodo.23640565) (wersja / Version / version 0.1.1)

@@ -20,7 +20,7 @@ Dane syntetyczne są oznaczone w nazwie pliku, w README i w polu `zrodlo`. Testy
 
 ## Etapy
 
-### v0.1 Fundament — domknięcie: wpis w Pulsie
+### v0.1 Fundament — zamknięte (v0.1.0, v0.1.1)
 
 | Element | Stan |
 |---|---|
@@ -31,20 +31,30 @@ Dane syntetyczne są oznaczone w nazwie pliku, w README i w polu `zrodlo`. Testy
 | Testy (5) i GitHub Actions, bramka jakości `--fail-on`, komenda `vtsqa` | zrobione |
 | Mapa wyniku w README (z prawdziwego uruchomienia), README PL/DE/EN | zrobione |
 | Repo publiczne, GitHub Pages, release v0.1.0, DOI 10.5281/zenodo.23624899 | zrobione |
-| Puls: wpis `milestone` z DOI, PL/DE/EN | po DOI |
+| Puls: wpis `milestone` z DOI, PL/DE/EN | zrobione (#54, #55) |
 
 **Kryterium wyjścia:** testy przechodzą; w QGIS warstwa `findings` pokazuje 11 znalezisk na pliku syntetycznym; strona działa na GitHub Pages w PL/DE/EN; release ma DOI; wpis milestone w Pulsie.
 
-### v0.2 Warszawa na prawdziwym schemacie
+### v0.2a Pierwsze życia silnika — zamknięte (0.2.0)
 
-Warunek startu: działa WMS m.st. Warszawy (R0 z 23–24.10.2026: WFS z zielenią niedostępny, WMS niestabilny).
+- Przewidywanie L1–L4 z konsekwencjami K0–K7 zapieczętowane przed kodem wstrzykiwacza (Puls #56).
+- Wstrzykiwacz `tools/inject.py` (zestawy A/B/C/M), `truth.json`, pomiar `tools/measure.py`.
+- Wynik: 4/4 CONFIRMED (Puls #57–#60), `OUTCOME_v0_2a.md`, `results/v0_2a/`.
+- Zmierzone ograniczenia (RULES.md): po pierwszym błędzie typu R01/R02/R04/R05 kontrola rekordu się kończy; obwód z jednostką (`45 cm`) pomijany bez komunikatu.
 
-- R0: odczyt atrybutów `ZIELEN_DRZEWA` (GetFeatureInfo w EPSG:2178), porównanie ze schematem Bazy Zieleni.
-- Mapowanie pól miasta na pola silnika: `rules/warszawa_688/mapping.yaml`.
-- Przewidywanie M0 zapieczętowane przed pomiarem: które reguły da się sprawdzić na danych publicznych i ile znalezisk na wycinku Rembertowa.
-- Pomiar, OUTCOME, wpis `life` w Pulsie.
+### v0.2b Warszawa na danych publicznych — skreślone
 
-**Kryterium wyjścia:** OUTCOME M0 z liczbami i werdyktem.
+R0 zamknięte 25.10.2026: publiczny WMS m.st. Warszawy zwraca dla `ZIELEN_DRZEWA` tylko `OBJECTID`, bez klasy ryzyka, gatunku i obwodu. Zgodności ze Standardem nie da się sprawdzić na danych publicznych. Kontrola ma sens na dostawie GPKG wykonawcy.
+
+### v0.2.1 Luki z v0.2a
+
+- Zgłaszanie wszystkich błędów w rekordzie (bez przerywania po pierwszym).
+- Komunikat dla obwodu z jednostką lub tekstem.
+- Przewidywanie przed kodem, pomiar na tych samych zestawach, wpisy w Pulsie, release z DOI.
+
+### VORO (osobny etap, po v0.2.1)
+
+Podpięcie do organizmu VORO: pakiet domenowy, providery Observation i Outcome, bramka regresji K6. LifeKernel bez zmian.
 
 ### v0.3 Algorytm w QGIS
 
@@ -87,7 +97,10 @@ Synthetische Daten sind im Dateinamen, im README und im Feld `zrodlo` gekennzeic
 | | Inhalt | Abschlusskriterium |
 |---|---|---|
 | v0.1 | Engine, 10 Regeln, synthetische Daten, QGIS-Stil, Webseite PL/DE/EN | 11 Befunde in QGIS, Seite auf GitHub Pages, Release mit DOI, Puls-Milestone |
-| v0.2 | echtes Warschauer Schema (sobald der WMS der Stadt läuft), Feldzuordnung, M0 | OUTCOME M0 mit Zahlen und Urteil |
+| v0.2a | erste gemessene Läufe auf eingebauten Fehlern | 4/4 CONFIRMED — erledigt (0.2.0) |
+| v0.2b | Warschau auf öffentlichen Daten | gestrichen: öffentlicher WMS liefert nur `OBJECTID` |
+| v0.2.1 | alle Fehler pro Datensatz melden, Meldung für Umfang mit Einheit | Vorhersage, Messung, Release mit DOI |
+| VORO | Anbindung an den VORO-Organismus | Regression K6 unverändert |
 | v0.3 | QGIS-Processing-Algorithmus ohne Zusatzpakete | gleiche 11 Befunde in QGIS 3.40 |
 | v0.4 | Regelpaket DE nach FLL-Baumkontrollrichtlinien, zuerst R0 | Regelbeschreibung mit Verweisen, alle Testfehler gefunden |
 
@@ -117,7 +130,10 @@ Synthetic data is marked in the file name, the README and the `zrodlo` field. Te
 | | Scope | Exit criterion |
 |---|---|---|
 | v0.1 | engine, 10 rules, synthetic data, QGIS style, web page PL/DE/EN | 11 findings in QGIS, page on GitHub Pages, release with DOI, Puls milestone |
-| v0.2 | real Warsaw schema (once the city's WMS works), field mapping, M0 | M0 OUTCOME with numbers and verdict |
+| v0.2a | first measured runs on injected errors | 4/4 CONFIRMED — done (0.2.0) |
+| v0.2b | Warsaw on public data | dropped: public WMS returns only `OBJECTID` |
+| v0.2.1 | report all errors per record, message for girth with a unit | prediction, measurement, release with DOI |
+| VORO | link to the VORO organism | K6 regression unchanged |
 | v0.3 | QGIS Processing algorithm, no extra packages | same 11 findings in QGIS 3.40 |
 | v0.4 | German rule pack based on FLL tree inspection guidelines, R0 first | rule description with references, all test errors found |
 

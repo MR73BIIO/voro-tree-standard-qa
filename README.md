@@ -69,7 +69,7 @@ It does not assess tree condition and does not replace an arborist. It checks wh
 
 ## Status
 
-Version 0.1.0. Next steps and exit criteria: [ROADMAP.md](ROADMAP.md). Changes: [CHANGELOG.md](CHANGELOG.md).
+Version 0.2.0. First measured lives (v0.2a): 4 runs on injected-error sets, 4/4 CONFIRMED, results in [OUTCOME_v0_2a.md](OUTCOME_v0_2a.md); known limits in [RULES.md](rules/warszawa_688/RULES.md). Next steps and exit criteria: [ROADMAP.md](ROADMAP.md). Changes: [CHANGELOG.md](CHANGELOG.md).
 
 ## Licence
 
