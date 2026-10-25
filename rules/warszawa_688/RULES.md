@@ -29,3 +29,15 @@ Pola wejściowe / Eingabefelder / Input fields: `nr`, `klasa`, `uzytkowanie`, `d
 ## Czego reguły nie sprawdzają
 
 Samej oceny stanu zdrowotnego drzewa (zał. 5), poprawności gatunku, zdjęć ani arbotagów. To zostaje po stronie ogrodnika i dendrologa.
+
+## Kolejność sprawdzania i znane ograniczenia (zmierzone w v0.2a)
+
+Kolejność w rekordzie: R10 → R07 → R01 → R08 → R03 → R02 → R04 → R05 → R06. R09 liczona dla całego pliku.
+
+- **Po R01 (klasa spoza 1–5 albo 4–5), R02, R04 i R05 sprawdzanie rekordu się kończy.** Drugi błąd w tym samym rekordzie nie jest wtedy zgłaszany (pomiar v0.2a, L4: 3 z 3 przewidzianych przypadków). Po poprawce pierwszego błędu warto uruchomić kontrolę jeszcze raz.
+- **Obwód z jednostką lub tekstem (np. `45 cm`) jest pomijany bez komunikatu** (pomiar v0.2a, L3, przypadek B9). Obwód podawać jako liczbę (`45` albo `45,5`).
+- Obsługiwane bez fałszywych alarmów (pomiar v0.2a): klasa `2.0` i ` 2`, kategoria małą literą lub ze spacją, obwód z przecinkiem, plik GPKG z kolumnami typowanymi (data jako data, klasa i obwód jako liczby).
+
+**DE:** Nach R01, R02, R04 und R05 endet die Prüfung des Datensatzes; ein zweiter Fehler im selben Datensatz wird dann nicht gemeldet. Stammumfang mit Einheit (`45 cm`) wird ohne Meldung übergangen. Typisierte GPKG-Spalten werden ohne Fehlalarme verarbeitet.
+
+**EN:** After R01, R02, R04 and R05 the record check stops; a second error in the same record is then not reported. Girth with a unit (`45 cm`) is skipped without a message. Typed GPKG columns are handled without false alarms.
