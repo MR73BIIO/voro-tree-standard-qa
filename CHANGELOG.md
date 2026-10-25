@@ -2,6 +2,8 @@
 
 ## 0.2.0 — 2026-10-25
 
+DOI: [10.5281/zenodo.23644207](https://doi.org/10.5281/zenodo.23644207) (wersja / Version / version 0.2.0)
+
 **PL**
 - v0.2a: pierwsze zmierzone życia. Przewidywanie L1–L4 (K0–K7) zapieczętowane przed kodem; wstrzykiwacz `tools/inject.py`, pomiar `tools/measure.py`.
 - Wynik 4/4 CONFIRMED: `OUTCOME_v0_2a.md`, `results/v0_2a/`.

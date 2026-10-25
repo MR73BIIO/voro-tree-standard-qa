@@ -4,14 +4,14 @@ title: "voro-tree-standard-qa"
 version: 0.2.0
 date-released: 2026-10-25
 license: GPL-2.0-or-later
-doi: 10.5281/zenodo.23624898
+doi: 10.5281/zenodo.23644207
 identifiers:
   - type: doi
     value: 10.5281/zenodo.23624898
     description: "Concept DOI (all versions)"
   - type: doi
-    value: 10.5281/zenodo.23624899
-    description: "DOI of version 0.1.0"
+    value: 10.5281/zenodo.23644207
+    description: "DOI of version 0.2.0"
 repository-code: "https://github.com/MR73BIIO/voro-tree-standard-qa"
 authors:
   - family-names: Ruszczak
