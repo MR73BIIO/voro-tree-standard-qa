@@ -16,6 +16,20 @@ Surowy wynik: `results/v0_2a/outcome.json`, `results/v0_2a/outcome.md`.
 
 Fałszywe alarmy: 0 we wszystkich plikach (150 rekordów w 5 plikach + 30 w pliku typowanym).
 
+## Korekta 01.11.2026
+
+Dotyczy wiersza L3: opis „błędy formatu z dostaw B1–B9” był błędny. B1–B9 są syntetyczne:
+wstawia je `tools/inject.py` do bazy syntetycznej (`zrodlo=SYNTETYCZNE`), nie pochodzą
+z żadnej dostawy. Publiczne dane Warszawy (WMS) podają tylko położenie i `OBJECTID`, bez
+atrybutów (R0, 25.10.2026, `rules/warszawa_688/R0.md`).
+
+Wynik L3 bez zmian (CONFIRMED, 4/1/0). To pomiar silnika na tych przypadkach; nie mówi,
+jakie formaty występują w prawdziwych dostawach.
+
+Bez zmian zostają: tabela wyżej, zapieczętowany `PREDICTION_v0_2a.md` (to samo twierdzenie
+w liniach 47, 135, 143) oraz wpisy Pulsu #56 i #59. Korekta w Pulsie: #68. Pieczęć OUTCOME
+w Pulsie #57–#60 (`sha256:fa4d94bd…`) dotyczy wersji sprzed tej noty, commit `0511bbc`.
+
 ## Konsekwencje (z pieczęci)
 
 - **K0** — cztery życia CONFIRMED. Następna decyzja: domena VORO `trees_688` i providery (krok 3 ROADMAP v0.2a).
@@ -34,3 +48,7 @@ Fałszywe alarmy: 0 we wszystkich plikach (150 rekordów w 5 plikach + 30 w plik
 **DE:** Vier Leben, alle CONFIRMED (13/0/0, 13/0/0, 4/1/0, 11/3/0), 0 Fehlalarme. Bestätigte Lücken: Stammumfang „45 cm“ wird still übergangen; nach R01, R02, R04, R05 endet die Prüfung des Datensatzes.
 
 **EN:** Four lives, all CONFIRMED (13/0/0, 13/0/0, 4/1/0, 11/3/0), 0 false alarms. Confirmed gaps: girth "45 cm" is skipped silently; the record check stops after R01, R02, R04, R05.
+
+**DE (Korrektur 01.11.2026):** Die Formatfehler B1–B9 in L3 sind synthetisch und stammen nicht aus Lieferungen; das Ergebnis 4/1/0 bleibt unverändert, sagt aber nichts über Formate in echten Lieferungen.
+
+**EN (correction 01.11.2026):** The format errors B1–B9 in L3 are synthetic and do not come from deliveries; the 4/1/0 result stands but says nothing about formats in real deliveries.
