@@ -4,3 +4,4 @@ __pycache__/
 *_findings.gpkg
 *_findings.*.md
 .venv/
+/rembertow_syntetyczne.gpkg
